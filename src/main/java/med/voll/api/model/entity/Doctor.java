@@ -3,6 +3,8 @@ package med.voll.api.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import med.voll.api.model.dto.DoctorDTO;
+import med.voll.api.model.dto.ResponseDoctorDTO;
+import med.voll.api.model.dto.UpdateDoctorDataDTO;
 import med.voll.api.utils.enums.Specialty;
 
 @Entity(name = "doctors")
@@ -17,15 +19,31 @@ public class Doctor {
     private Long id;
     private String name;
     private String email;
+    private String phone;
     private String crm;
 
     @Enumerated(EnumType.STRING)
-    private Specialty especialty;
+    private Specialty specialty;
 
     @Embedded
     private Address address;
 
-    public Doctor(DoctorDTO doctorDTO) {
+    private boolean active;
 
+    public Doctor(DoctorDTO doctorDTO) {
+        this.active = true;
+        this.phone = doctorDTO.phone();
+        this.name = doctorDTO.name();
+        this.email = doctorDTO.email();
+        this.crm = doctorDTO.crm();
+    }
+
+    public void update(UpdateDoctorDataDTO doctor) {
+        if (doctor.name() != null) this.name = doctor.name();
+        if (doctor.phone() != null) this.phone = doctor.phone();
+    }
+
+    public void updateStatus(Doctor doctor) {
+        doctor.active = false;
     }
 }
