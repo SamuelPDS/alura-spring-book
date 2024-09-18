@@ -36,6 +36,8 @@ public class Doctor {
         this.name = doctorDTO.name();
         this.email = doctorDTO.email();
         this.crm = doctorDTO.crm();
+        this.specialty = doctorDTO.specialty();
+        this.address = doctorDTO.address();
     }
 
     public void update(UpdateDoctorDataDTO doctor) {
