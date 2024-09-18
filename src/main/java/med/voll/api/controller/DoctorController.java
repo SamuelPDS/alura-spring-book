@@ -41,6 +41,12 @@ public class DoctorController {
         return ResponseEntity.ok(doctors.map(ResponseDoctorDTO::new));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DoctorDetailsDTO> getDetailsDoctorById(@PathVariable Long id) {
+        var doctor = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DoctorDetailsDTO(doctor));
+    }
+
     @PutMapping
     @Transactional
     public ResponseEntity<DoctorDetailsDTO> updateDoctor(UpdateDoctorDataDTO dto) {
