@@ -1,1 +1,0 @@
-Alter table doctors add phone varchar(24) not null;
